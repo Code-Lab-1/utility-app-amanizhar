@@ -1,0 +1,275 @@
+drinks_menu = [
+    { 
+    'itemname' : 'Sprite',
+    'itemno' : 1,
+    'price' : 3,
+    'qty' : 4,
+     },
+
+         { 
+    'itemname' : 'Dew',
+    'itemno' : 2,
+    'price' : 3,
+    'qty' : 2,
+     },
+
+         { 
+    'itemname' : 'Berry juice',
+    'itemno' : 3,
+    'price' : 3,
+    'qty' : 1,
+     },
+     
+              { 
+    'itemname' : 'Sparkiling water',
+    'itemno' : 4,
+    'price' : 3,
+    'qty' : 3,
+     },
+     
+              { 
+    'itemname' : 'Coke',
+    'itemno' : 5,
+    'price' : 3,
+    'qty' : 1,
+     },
+     
+         { 
+    'itemname' : 'Tea',
+    'itemno' : 6,
+    'price' : 5,
+    'qty' : 4,
+     },
+
+         { 
+    'itemname' : 'Hot coffee',
+    'itemno' : 7,
+    'price' : 1,
+    'qty' : 7,
+     },
+
+         { 
+    'itemname' : 'Cold coffee',
+    'itemno' : 8,
+    'price' : 3,
+    'qty' : 1,
+     },
+     
+              { 
+    'itemname' : 'Water',
+    'itemno' : 9,
+    'price' : 3,
+    'qty' : 12,
+     },
+     
+              { 
+    'itemname' : 'Red bull',
+    'itemno' : 10,
+    'price' : 3,
+    'qty' : 9,
+     },
+         { 
+    'itemname' : 'Cake',
+    'itemno' : 11,
+    'price' : 3,
+    'qty' : 4,
+     },
+
+         { 
+    'itemname' : 'Donut',
+    'itemno' : 12,
+    'price' : 3,
+    'qty' : 2,
+     },
+
+         { 
+    'itemname' : 'Chips',
+    'itemno' : 13,
+    'price' : 3,
+    'qty' : 14,
+     },
+     
+              { 
+    'itemname' : 'Lollipop',
+    'itemno' : 14,
+    'price' : 3,
+    'qty' : 1,
+     },
+     
+              { 
+    'itemname' : 'Jelly',
+    'itemno' : 15,
+    'price' : 5,
+    'qty' : 6,
+     },
+
+         { 
+    'itemname' : 'Wafer',
+    'itemno' : 16,
+    'price' : 2,
+    'qty' : 4,
+     },
+
+         { 
+    'itemname' : 'Cookies',
+    'itemno' : 17,
+    'price' : 2,
+    'qty' : 2,
+     },
+
+         { 
+    'itemname' : 'Biscuits',
+    'itemno' : 18,
+    'price' : 2,
+    'qty' : 1,
+     },
+     
+              { 
+    'itemname' : 'Protein bar',
+    'itemno' : 19,
+    'price' : 3,
+    'qty' : 1,
+     },
+     
+              { 
+    'itemname' : 'Noodles',
+    'itemno' : 20,
+    'price' : 6,
+    'qty' : 8,
+     },
+]
+
+#printing drinks and logo
+def drinks():
+  print("==========-Vending-Machine========")
+  print("=================DRINKS================")
+  drinks = {
+    "01 Sprite" : "3 AED", 
+    "02 Dew" : "3 AED",
+    "03 Berry juice" : "3 AED",
+    "04 Sparkiling water" : "3 AED",
+    "05 Coke" : "3 AED",
+    "06 Tea" : "5 AED",
+    "07 Hot coffee" : "1 AED",
+    "08 Cold coffee" : "2 AED",
+    "09 Water" : "2 AED",
+    "10 Redbull" : "2 AED",
+}
+  for item, price in drinks.items():
+    print(f" {item:30}, {price}")
+
+#printing snacks
+def snacks():
+  print("=================SNACKS================")
+  snacks_items = {
+    "11 Cake" : "3 AED", 
+    "12 Donut" : "3 AED",
+    "13 Chips" : "3 AED",
+    "14 Lollipop" : "3 AED",
+    "15 Jelly" : "3 AED",
+    "16 Wafer" : "5 AED",
+    "17 Cookies" : "1 AED",
+    "18 Biscuits" : "2 AED",
+    "19 Protein bar" : "2 AED",
+    "20 Noodles" : "2 AED",
+}
+#a for loop system that prints out the dictionary like a menu
+  for item, price in snacks_items.items():
+    print(f" {item:30}, {price}")
+  print()
+
+
+#printing the menu function
+def menu():
+  drinks()
+  snacks()
+
+#the main ordering system
+def order():
+
+  #a while loop that starts the function
+  while True:
+    
+    #prints the menu
+    menu()
+
+    #asks user input of the credits
+    credits = int(input('Please insert an amount to proceed to buy an item e:\n'))
+
+    #invalid amount
+    if credits <= 0:
+      print('Please enter a valid amount\n')
+      order()
+
+    #asks user input of the displayed items
+    iteminput = int(input('Please input the number of your desired item\n'))
+
+    #product does not exist message
+    if iteminput >= 21 or iteminput <= 0:
+      print('Product does not exist or is invalid')
+      
+    cart = []
+    total_sum = []
+
+    for di in drinks_menu:
+
+          #insufficient funds
+          if iteminput == di['itemno'] and credits <= di['price'] :
+            print('Insufficient funds, please kindly re-enter the appropriate amount\n')
+            order()
+
+          #out of stock
+          if iteminput == di['itemno'] and di['qty'] <= 0:
+            print(f"{di['itemname']} is currently out of stock please choose another item \n")
+            order()
+
+          #inputting the item 
+          if iteminput == di['itemno'] and credits >= di['price']:
+
+            #displays the item the user picked
+            print('=======================================\n')
+            print(f"You picked {di['itemname']}\n")
+            print('=======================================\n')
+
+            #reduces the stock quantity by 1
+            di['qty'] = di.get('qty', 0) - 1
+
+            #appends the price into the list of total_sum
+            total_sum.append(di.get('price'))
+            
+            #appends the item into the cart
+            cart.append(di.get('itemname'))
+
+            #prints the remaining stock of the item
+            print(f"Amount of {di['itemname']} remaining: {di['qty']}\n")
+
+            #prints the the item being dispensed
+            print('=======================================\n')
+            print("You may now proceed a receive the following items that have been dispensed:\n")
+
+            #prints the cart
+            print(cart, '\n')
+            print('=======================================\n')
+
+            #prints the total
+            total=sum(total_sum)
+            print("And here is your total amount:\n\n\t", total, "AED\n")
+
+            #prints the change
+            change = credits - total
+            print("And your change is:\n\n\t", change, "AED\n")
+
+            #prints the final message
+            print('=======================================\n')
+            print("Thank you for your patronage!\n")
+            print('=======================================\n')
+
+            #breaks the for loop function and starts over again
+            break
+
+#renaming the function to vending machine
+def vendingmachine():
+  order()
+
+#output:
+vendingmachine()
